@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生作品展 | TCU ITM</title>
+    <style>
+        /* 沿用首頁的全域變數與基本設定，確保全站風格高度一致 */
+        :root {
+            --primary: #4F46E5;
+            --secondary: #0EA5E9;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --soft-shadow: 0 10px 40px -10px rgba(15, 23, 42, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-muted);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 導覽列 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 140px auto 60px;
+            padding: 0 24px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 0 0 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #EEF2FF;
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* 專案卡片網格 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--soft-shadow);
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.15);
+        }
+
+        /* 圖片預留區 (相對路徑指向 graph) */
+        .project-image {
+            width: 100%;
+            height: 240px;
+            background: #E2E8F0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .img-placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #94A3B8;
+            font-size: 0.9rem;
+        }
+
+        .project-content {
+            padding: 32px;
+            flex-grow: 1;
+        }
+
+        .project-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .project-content h3 {
+            color: var(--text-main);
+            font-size: 1.35rem;
+            margin: 0 0 12px;
+            font-weight: 700;
+        }
+
+        .project-content p {
+            margin: 0 0 24px;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 40px 5%;
+            text-align: center;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo"><div class="logo-dot"></div> TCU ITM</a>
+        <nav>
+            <a href="index.html">Platform Overview (首頁)</a>
+            <a href="studentworks.html" class="active">Case Studies (學生作品)</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <span class="badge">Student Portfolios</span>
+            <h1>實務專題與開發案例</h1>
+            <p>探索本系學生如何運用資訊科技，打造具備商業價值與社會影響力的數位產品。</p>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- 專案卡片 1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <!-- 使用相對路徑讀取 graph 資料夾 -->
+                    <img src="graph/project_iot.jpg" alt="智慧物聯網專題照片" onerror="this.style.display='none'">
+                    <span class="img-placeholder-text">圖檔載入區: graph/project_iot.jpg</span>
+                </div>
+                <div class="project-content">
+                    <span class="project-tag">IoT & Cloud Database</span>
+                    <h3>智慧自動化環境監測系統</h3>
+                    <p>整合感測器硬體與後端雲端資料庫，開發出一套能即時回傳環境數據並自動生成視覺化圖表的管理儀表板，大幅提升管理效率。</p>
+                </div>
+            </div>
+
+            <!-- 專案卡片 2 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <!-- 使用相對路徑讀取 graph 資料夾 -->
+                    <img src="graph/project_web.jpg" alt="前端網頁專題照片" onerror="this.style.display='none'">
+                    <span class="img-placeholder-text">圖檔載入區: graph/project_web.jpg</span>
+                </div>
+                <div class="project-content">
+                    <span class="project-tag">Web Development</span>
+                    <h3>跨平台實務管理工具</h3>
+                    <p>利用現代前端技術構建具備優異 UI/UX 的網頁應用程式，透過流暢的介面設計與本地存儲技術，提供優良的使用者體驗。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 慈濟大學資訊科技與管理學系. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慈濟大學 資訊科技與管理學系 | TCU ITM</title>
+    <style>
+        /* SaaS 企業風格 全域變數 */
+        :root {
+            --primary: #4F46E5;       /* 科技靛藍 */
+            --primary-light: #818CF8;
+            --secondary: #0EA5E9;     /* 亮天藍 */
+            --text-main: #0F172A;     /* 深石板灰 (標題) */
+            --text-muted: #475569;    /* 中石板灰 (內文) */
+            --bg-color: #F8FAFC;      /* 極淺灰藍背景 */
+            --card-bg: #FFFFFF;
+            --soft-shadow: 0 10px 40px -10px rgba(15, 23, 42, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-muted);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* SaaS 風格頂部導覽列 (毛玻璃效果) */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* 內容容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* 英雄區塊 (Hero Section) */
+        .hero {
+            padding: 160px 0 80px;
+            text-align: center;
+        }
+
+        /* 漸層標題 */
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* 多媒體預留區塊 */
+        .media-showcase {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 12px;
+            box-shadow: var(--soft-shadow);
+            margin: 0 auto 60px;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .media-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #F1F5F9;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .media-placeholder video, .media-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 標籤提示 */
+        .media-tag {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(15, 23, 42, 0.7);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            backdrop-filter: blur(4px);
+        }
+
+        /* 實驗室特色網格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-bottom: 100px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px 32px;
+            border-radius: 20px;
+            box-shadow: var(--soft-shadow);
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            color: var(--text-main);
+            font-size: 1.25rem;
+            margin: 0 0 12px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* 頁尾與 AI 協作紀錄 */
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 60px 5% 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .ai-log {
+            display: inline-block;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo"><div class="logo-dot"></div> TCU ITM</a>
+        <nav>
+            <a href="index.html" class="active">Platform Overview (首頁)</a>
+            <a href="studentworks.html">Case Studies (學生作品)</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Empowering the Next Generation of <br><span class="text-gradient">Tech Leaders.</span></h1>
+            <p>結合 AI 大數據、智慧物聯與元宇宙多媒體，我們提供最前沿的資訊管理教育架構。協助學生從理論基礎走向實務開發，建構完整的數位解決方案。</p>
+            
+            <!-- 影片預留區 (相對路徑指向 graph) -->
+            <div class="media-showcase">
+                <div class="media-placeholder">
+                    <!-- 後續作業請將 graph/intro_video.mp4 替換為您的實拍影片 -->
+                    <video controls preload="metadata" poster="graph/video_poster.jpg" style="border-radius: 16px;">
+                        <source src="graph/intro_video.mp4" type="video/mp4">
+                        <span style="color:#94a3b8;">[ Video Placeholder - 等待影片上傳至 graph/ 資料夾 ]</span>
+                    </video>
+                </div>
+                <div class="media-tag">System Initialization</div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✦</div>
+                <h3>AI Data Analytics</h3>
+                <p>大數據實驗室專注於機器學習與資料探勘，協助企業與醫療體系進行數位轉型與決策最佳化。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⎈</div>
+                <h3>IoT Environment</h3>
+                <p>智慧物聯實驗室提供完整的感測器與雲端資料庫串接訓練，打造即時監控與自動化管理系統。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✧</div>
+                <h3>Metaverse & UI/UX</h3>
+                <p>元宇宙多媒體實驗室培育前端開發與視覺設計人才，專注於提供流暢的跨平台互動體驗。</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2026 慈濟大學資訊科技與管理學系. All rights reserved.</p>
+            <!-- 評分加分項目：AI 協作紀錄 -->
+            <div class="ai-log">
+                ✨ <strong>AI Collaboration Log:</strong> 本專案採用 SaaS Startup 風格，由 AI 輔助生成 HTML 架構與 CSS 柔和陰影/漸層變數，以符合企業級 UI/UX 規範。
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
